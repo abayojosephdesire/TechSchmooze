@@ -26,8 +26,13 @@ router.get("/orders", (req, res) => {
   Order.find({}).then((orders) => res.send(orders));
 });
 
-router.post("/order", auth.ensureLoggedIn, (req, res) => {
+
+// Remember to add this
+// router.post("/order", auth.ensureLoggedIn, (req, res) => {
+router.post("/order", (req, res) => {
   const newOrder = new Order({
+    creator_id: req.user._id,
+    creator_name: req.user.name,
     content: req.body.content,
   });
 
