@@ -1,0 +1,74 @@
+.container {
+  background-color: skyblue;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+}
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.feature {
+  color: white;
+}
+.feature:hover {
+  color: blue;
+}
+.button {
+  background-color: aliceblue;
+  border-radius: 8px;
+  height: 32px;
+  width: 128px;
+  margin-top: 12px;
+}
+.button:hover {
+  background-color: blue;
+  color: white;
+}
+.text-area {
+  background-color: aliceblue;
+  border-radius: 8px;
+  height: 30px;
+  width: 128px;
+  margin-top: 8px;
+  margin-right: -36px;
+}
+.dropdown {
+  float: left;
+  /* overflow: hidden; */
+}
+.dropcontent {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  padding: 12px;
+}
+
+.dropLink:hover {
+  background-color: blue;
+  color: white;
+}
+.dropdown:hover .dropcontent {
+  display: block;
+}
+.tech {
+  text-decoration: none;
+  color: blue;
+  font-size: 24px;
+  font-weight: bolder;
+}
+.tech:hover {
+  color: blue;
+}
+.dropLink {
+  text-decoration: none;
+  float: none;
+  color: black;
+  padding: 16px;
+  display: block;
+  text-align: left;
+}

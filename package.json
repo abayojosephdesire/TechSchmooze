@@ -1,5 +1,5 @@
 {
-  "name": "weblab-skeleton",
+  "name": "techschoomze",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
@@ -46,6 +46,7 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.1",
+    "tailwindcss": "^3.4.1",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"

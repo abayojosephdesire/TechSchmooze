@@ -11,6 +11,10 @@ import "../utilities.css";
 import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
+import Home from "./pages/Home.js";
+import Orders from "./pages/Orders.js";
+// import NavBar from "./NavBar.js";
+import Login from "./pages/Login.js";
 
 /**
  * Define the "App" component
@@ -43,21 +47,33 @@ const App = () => {
   };
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <Skeleton
-            path="/"
-            handleLogin={handleLogin}
-            handleLogout={handleLogout}
-            userId={userId}
-          />
-        }
-      />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </>
   );
+  //   <>
+  //     <CardSale />
+
+  //     <Routes>
+  //       <Route
+  //         path="/"
+  //         element={
+  //           <Skeleton
+  //             path="/"
+  //             handleLogin={handleLogin}
+  //             handleLogout={handleLogout}
+  //             userId={userId}
+  //           />
+  //         }
+  //       />
+  //       <Route path="*" element={<NotFound />} />
+  //     </Routes>
+  //   </>
+  // );
 };
 
 export default App;
