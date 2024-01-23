@@ -6,6 +6,9 @@ const Card = (props) => {
   return (
     <div>
       <SingleOrder
+        _id={props._id}
+        creator_name={props.creator_name}
+        creator_id={props.creator_id}
         content={props.content}
       />
     </div>
