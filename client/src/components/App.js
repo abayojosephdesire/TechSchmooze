@@ -5,6 +5,7 @@ import jwt_decode from "jwt-decode";
 
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
+import Market from "./pages/Market.js";
 
 import "../utilities.css";
 
@@ -52,6 +53,8 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Market />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
