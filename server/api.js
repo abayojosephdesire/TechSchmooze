@@ -11,6 +11,7 @@ const express = require("express");
 
 // import models so we can interact with the database
 const User = require("./models/user");
+const Order = require("./models/order");
 
 // import authentication library
 const auth = require("./auth");
@@ -21,6 +22,18 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 
+router.get("/orders", (req, res) => {
+  Order.find({}).then((orders) => res.send(orders));
+});
+
+router.post("/order", auth.ensureLoggedIn, (req, res) => {
+  const newOrder = new Order({
+    content: req.body.content,
+  });
+
+  newOrder.save().then((order) => res.send(order));
+});
+
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
@@ -30,6 +43,12 @@ router.get("/whoami", (req, res) => {
   }
 
   res.send(req.user);
+});
+
+router.get("/user", (req, res) => {
+  User.findById(req.query.userid).then((user) => {
+    res.send(user);
+  });
 });
 
 router.post("/initsocket", (req, res) => {

@@ -5,6 +5,7 @@ import jwt_decode from "jwt-decode";
 
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
+import Market from "./pages/Market.js";
 
 import "../utilities.css";
 
@@ -44,17 +45,18 @@ const App = () => {
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <Skeleton
-            path="/"
-            handleLogin={handleLogin}
-            handleLogout={handleLogout}
-            userId={userId}
-          />
-        }
-      />
+    {/* //   <Route
+    //     path="/"
+    //     element={
+    //       <Skeleton
+    //         path="/"
+    //         handleLogin={handleLogin}
+    //         handleLogout={handleLogout}
+    //         userId={userId}
+    //       />
+    //     }
+    //   /> */}
+      <Route path="/" element={<Market />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
