@@ -26,7 +26,9 @@ router.get("/orders", (req, res) => {
   Order.find({}).then((orders) => res.send(orders));
 });
 
-router.post("/order", auth.ensureLoggedIn, (req, res) => {
+// Remember to add this
+// router.post("/order", auth.ensureLoggedIn, (req, res) => {
+router.post("/order", (req, res) => {
   const newOrder = new Order({
     content: req.body.content,
   });
