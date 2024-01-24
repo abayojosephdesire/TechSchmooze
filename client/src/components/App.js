@@ -59,7 +59,7 @@ const App = () => {
             />
           }
         /> */}
-        <Route path="/" element={<Morders />} />
+        <Route path="/" element={<Morders userId={userId} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
