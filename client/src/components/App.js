@@ -1,26 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-
-import NavBar from "./modules/NavBar.js";
-import NotFound from "./pages/NotFound.js";
-import Skeleton from "./pages/Skeleton.js";
-import Morders from "./pages/morders.js";
-
-import "../utilities.css";
-
 import { socket } from "../client-socket.js";
-
 import { get, post } from "../utilities";
+import NavBar from "./modules/NavBar.js";
 import Home from "./pages/Home.js";
 import Orders from "./pages/Orders.js";
-// import NavBar from "./NavBar.js";
-import Login from "./pages/Login.js";
+import Sales from "./pages/Sales.js";
+import NotFound from "./pages/NotFound.js";
+import "../utilities.css";
+import "./App.css";
 
-/**
- * Define the "App" component
- */
 const App = () => {
   const [userId, setUserId] = useState(undefined);
 
@@ -42,22 +33,26 @@ const App = () => {
       post("/api/initsocket", { socketid: socket.id });
     });
   };
-
+  const navigate = useNavigate();
   const handleLogout = () => {
     setUserId(undefined);
     post("/api/logout");
+    navigate('/');
   };
 
   return (
     <>
-      {/* <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} /> */}
-      <Routes>
-        {/* <Route path="/" element={<Morders userId={userId} />} /> */}
-        <Route path="*" element={<NotFound />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+      <div class="App-container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/orders/" element={<Orders userId={userId} />} />
+          <Route path="/sales/" element={<Sales userId={userId} />} />
+          {/* <Route path="/borrow/" element={<Borrow userId={userId} />} />
+          <Route path="/giveaway/" element={<GiveAway userId={userId} />} /> */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
     </>
   );
 };
