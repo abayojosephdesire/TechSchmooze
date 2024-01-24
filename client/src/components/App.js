@@ -50,7 +50,7 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Market />} />
@@ -58,25 +58,6 @@ const App = () => {
       </Routes>
     </>
   );
-  //   <>
-  //     <CardSale />
-
-  //     <Routes>
-  //       <Route
-  //         path="/"
-  //         element={
-  //           <Skeleton
-  //             path="/"
-  //             handleLogin={handleLogin}
-  //             handleLogout={handleLogout}
-  //             userId={userId}
-  //           />
-  //         }
-  //       />
-  //       <Route path="*" element={<NotFound />} />
-  //     </Routes>
-  //   </>
-  // );
 };
 
 export default App;

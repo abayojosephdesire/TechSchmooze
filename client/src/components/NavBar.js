@@ -6,7 +6,7 @@ function NavBar() {
     <div>
       <section className="container">
         <nav className="navigation">
-          <Link to="/home" className="tech">
+          <Link to="/" className="tech">
             TechSchoomze
           </Link>
           <div className="dropdown">
