@@ -17,6 +17,7 @@ import Home from "./pages/Home.js";
 import Orders from "./pages/Orders.js";
 // import NavBar from "./NavBar.js";
 import Login from "./pages/Login.js";
+import Home from "./pages/Home.js";
 
 /**
  * Define the "App" component
@@ -52,19 +53,11 @@ const App = () => {
     <>
       <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Routes>
-        {/* <Route
-          path="/"
-          element={
-            <Skeleton
-              path="/"
-              handleLogin={handleLogin}
-              handleLogout={handleLogout}
-              userId={userId}
-            />
-          }
-        /> */}
         <Route path="/" element={<Morders userId={userId} />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </>
   );
