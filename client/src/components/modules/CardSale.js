@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import SingleOrder from "./SingleOrder.js";
+import SingleSale from "./SingleSale.js";
 import { get } from "../../utilities";
+import "./CardSale.css";
 
-const Card = (props) => {
+const CardSale = (props) => {
   return (
     <div>
-      <SingleOrder
+      <SingleSale
         _id={props._id}
         creator_name={props.creator_name}
         creator_id={props.creator_id}
@@ -14,4 +15,4 @@ const Card = (props) => {
     </div>
   );
 };
-export default Card;
+export default CardSale;
