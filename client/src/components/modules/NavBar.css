@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+:root{--primary:#a2c200;--grey:#f7f7f7;--white:#fff;--xs:4px;--s:8px;--m:16px;--l:24px;}
+body{font-family:'Open Sans',sans-serif;margin:0;background-color:#f4f4f4;}
+*{box-sizing:border-box;}
+a{text-decoration:none;color:#000;}
+li{list-style-type:none;}
+
+.NavBar-container{background-color:#fff;border-bottom:2px solid #f0f0f0;position:fixed;width:100%;top:0;}
+.NavBar-content{width:800px;margin:auto;display:flex;}
+.NavBar-title{color:blue;padding:0 30px;flex:1 0 25%;font-family:Chalkduster, fantasy;}
+.NavBar-title h2{font-size:22px;}
+.NavBar-linkContainer{padding:23px;flex:1 0 55%;display:flex;}
+.NavBar-link{margin:0 15px;font-size:15px;}
+.NavBar-link:hover, .NavBar-dropitem:hover{text-decoration:underline;}
+.NavBar-linkDrop{cursor:default;}
+.NavBar-linkDrop:hover{text-decoration:none;}
+.NavBar-loginContainer{flex:1 0 20%;padding:17px 0 0;}
+.NavBar-login{background-color:#b10303;border:none;padding:8px 17px;color:#fff;font-weight:bold;font-size:13px;}
+.NavBar-dropdown:hover .NavBar-dropContainer{display:block;}
+.NavBar-dropContainer{display:none;position:absolute;z-index:1;background-color:#fff;padding:10px 20px 10px 0;}
+.NavBar-dropitem{display:block;margin:15px 0;}
