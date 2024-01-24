@@ -3,7 +3,7 @@ import SingleOrder from "./SingleOrder.js";
 import { get } from "../../utilities";
 import "./CardOrder.css";
 
-// Changes
+// Change
 const CardOrder = (props) => {
   return (
     <div>
