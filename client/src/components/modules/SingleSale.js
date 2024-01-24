@@ -1,7 +1,7 @@
 import React from "react";
 // import { Link } from "@reach/router";
 
-const SingleOrder = (props) => {
+const SingleSale = (props) => {
   return (
     <div className="Card-container">
       <p className="Card-name">{props.creator_name}</p>
@@ -10,4 +10,4 @@ const SingleOrder = (props) => {
   );
 };
 
-export default SingleOrder;
+export default SingleSale;

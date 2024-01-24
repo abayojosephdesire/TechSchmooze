@@ -12,6 +12,7 @@ const express = require("express");
 // import models so we can interact with the database
 const User = require("./models/user");
 const Order = require("./models/order");
+const Sale = require("./models/sale");
 
 // import authentication library
 const auth = require("./auth");
@@ -22,13 +23,12 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 
+
+// Orders
 router.get("/orders", (req, res) => {
   Order.find({}).then((orders) => res.send(orders));
 });
-
-// Remember to add this
-// router.post("/order", auth.ensureLoggedIn, (req, res) => {
-router.post("/order", (req, res) => {
+router.post("/order", auth.ensureLoggedIn, (req, res) => {
   const newOrder = new Order({
     creator_id: req.user._id,
     creator_name: req.user.name,
@@ -36,6 +36,20 @@ router.post("/order", (req, res) => {
   });
 
   newOrder.save().then((order) => res.send(order));
+});
+
+// Sales
+router.get("/sales", (req, res) => {
+  Sale.find({}).then((sales) => res.send(sales));
+});
+router.post("/sale", auth.ensureLoggedIn, (req, res) => {
+  const newSale = new Sale({
+    creator_id: req.user._id,
+    creator_name: req.user.name,
+    content: req.body.content,
+  });
+
+  newSale.save().then((sale) => res.send(sale));
 });
 
 router.post("/login", auth.login);

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./NewPostInput.css";
 import { post } from "../../utilities";
 
 // New order input
@@ -16,19 +17,21 @@ const NewPostInput = (props) => {
   };
 
   return (
-    <div>
+    <div className="NewPostinput-container">
       <input
         type="text"
         placeholder={props.defaultText}
         value={value}
         onChange={handleChange}
+        className="NewPostInput-input"
       />
       <button
         type="submit"
         value="Submit"
         onClick={handleSubmit}
+        className="NewPostInput-button"
       >
-        Submit
+        Send
       </button>
     </div>
   );
@@ -46,4 +49,16 @@ const NewOrder = (props) => {
   return <NewPostInput defaultText="Enter Order" onSubmit={addOrder} />;
 };
 
-export {NewOrder};
+// New Sale
+const NewSale = (props) => {
+  const addSale = (value) => {
+    const body = { content: value };
+    post("/api/sale", body).then((sale) => {
+      props.addNewSale(sale);
+    });
+  };
+
+  return <NewPostInput defaultText="Enter sale" onSubmit={addSale} />;
+};
+
+export {NewOrder, NewSale};

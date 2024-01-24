@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import SingleOrder from "./SingleOrder.js";
 import { get } from "../../utilities";
+import "./CardOrder.css";
 
-const Card = (props) => {
+// Changes
+const CardOrder = (props) => {
   return (
     <div>
       <SingleOrder
@@ -14,4 +16,4 @@ const Card = (props) => {
     </div>
   );
 };
-export default Card;
+export default CardOrder;

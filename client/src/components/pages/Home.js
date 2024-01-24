@@ -1,12 +1,14 @@
-import React from "react";
-import NavBar from "../NavBar.js";
+import React, {useEffect} from "react";
+import NavBar from "../modules/NavBar.js";
 import "./Home.css";
 import { Link } from "react-router-dom";
 
-function Home() {
+const Home = () => {
+  useEffect(() => {
+    document.title = "Homepage"
+  }, []);
   return (
     <div>
-      <NavBar />
       <section className="body">
         <h1 className="head">TechSchoomze</h1>
         <h1>Buzz, Connect, Exchange</h1>
