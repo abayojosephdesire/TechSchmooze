@@ -1,10 +1,10 @@
 .section-container {
-  background-color: aliceblue;
+  width: 70%;
+  margin-left: 15%;
+  border: 5px solid white;
   padding: 8px;
-
-  position: absolute;
-  width: 50%;
-  left: 30%;
+  background: aliceblue;
+  background-clip: padding-box;
 }
 .container1 {
   display: flex;

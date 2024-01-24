@@ -6,6 +6,8 @@ function Orders() {
   return (
     <div>
       <NavBar />
+
+      <Card />
       <Card />
     </div>
   );
