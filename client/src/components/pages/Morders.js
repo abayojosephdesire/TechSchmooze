@@ -3,7 +3,7 @@ import Card from "../modules/Card.js";
 import { NewOrder} from "../modules/NewPostInput.js";
 import { get } from "../../utilities";
 
-const Market = (props) => {
+const Morders = (props) => {
   const [orders, setOrders] = useState([]);
 
   // When the Orders component mounts
@@ -25,6 +25,10 @@ const Market = (props) => {
   if (hasOrders) {
     ordersList = orders.map((orderObj) => (
       <Card
+        _id={orderObj._id}
+        creator_name={orderObj.creator_name}
+        creator_id={orderObj.creator_id}
+        userId={props.userId}
         content={orderObj.content}
       />
     ));
@@ -33,15 +37,9 @@ const Market = (props) => {
   }
   return (
     <>
-      {/* {props.userId && <NewOrder addNewOrder={addNewOrder} />} */}
-{/* Remember to restore this line containing the userId */}
-
-
-
-
-      {<NewOrder addNewOrder={addNewOrder} />}
+      {props.userId && <NewOrder addNewOrder={addNewOrder} />}
       {ordersList}
     </>
   );
 };
-export default Market;
+export default Morders;

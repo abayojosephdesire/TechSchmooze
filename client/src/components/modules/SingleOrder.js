@@ -4,6 +4,7 @@ import React from "react";
 const SingleOrder = (props) => {
   return (
     <div>
+      <p>{props.creator_name}</p>
       <p>{props.content}</p>
     </div>
   );

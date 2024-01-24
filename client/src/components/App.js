@@ -3,9 +3,10 @@ import { Routes, Route } from "react-router-dom";
 
 import jwt_decode from "jwt-decode";
 
+import NavBar from "./modules/NavBar.js";
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
-import Market from "./pages/Market.js";
+import Morders from "./pages/morders.js";
 
 import "../utilities.css";
 
@@ -49,11 +50,20 @@ const App = () => {
 
   return (
     <>
+      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Market />} />
+        {/* <Route
+          path="/"
+          element={
+            <Skeleton
+              path="/"
+              handleLogin={handleLogin}
+              handleLogout={handleLogout}
+              userId={userId}
+            />
+          }
+        /> */}
+        <Route path="/" element={<Morders userId={userId} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
