@@ -8,6 +8,9 @@ import NavBar from "./modules/NavBar.js";
 import Home from "./pages/Home.js";
 import Orders from "./pages/Orders.js";
 import Sales from "./pages/Sales.js";
+import Borrows from "./pages/Borrows.js";
+import GiveAways from "./pages/GiveAways.js";
+import Post from "./pages/Post.js";
 import NotFound from "./pages/NotFound.js";
 import "../utilities.css";
 import "./App.css";
@@ -48,8 +51,9 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/orders/" element={<Orders userId={userId} />} />
           <Route path="/sales/" element={<Sales userId={userId} />} />
-          {/* <Route path="/borrow/" element={<Borrow userId={userId} />} />
-          <Route path="/giveaway/" element={<GiveAway userId={userId} />} /> */}
+          <Route path="/borrows/" element={<Borrows userId={userId} />} />
+          <Route path="/giveaways/" element={<GiveAways userId={userId} />} />
+          <Route path="/post/" element={<Post userId={userId} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

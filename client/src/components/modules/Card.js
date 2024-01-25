@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import SingleOrder from "./SingleOrder.js";
+import SinglePost from "./SinglePost.js";
 import { get } from "../../utilities";
-import "./CardOrder.css";
 
 // Change
-const CardOrder = (props) => {
+const Card = (props) => {
   return (
     <div>
-      <SingleOrder
+      <SinglePost
         _id={props._id}
         creator_name={props.creator_name}
         creator_id={props.creator_id}
+        postDate={props.postDate}
+        title={props.title}
         content={props.content}
       />
     </div>
   );
 };
-export default CardOrder;
+export default Card;

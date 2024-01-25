@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import CardOrder from "../modules/CardOrder.js";
-import { NewOrder} from "../modules/NewPostInput.js";
+import Card from "../modules/Card.js";
 import { get } from "../../utilities";
 
 const Orders = (props) => {
@@ -23,20 +22,17 @@ const Orders = (props) => {
     });
   }, []);
 
-  // When the user submits an order, which is added on the screen immediately
-  const addNewOrder = (orderObj) => {
-    setOrders([orderObj].concat(orders));
-  };
-
   let ordersList = null;
   const hasOrders = orders.length !== 0;
   if (hasOrders) {
     ordersList = orders.map((orderObj) => (
-      <CardOrder
+      <Card
         _id={orderObj._id}
         creator_name={orderObj.creator_name}
         creator_id={orderObj.creator_id}
         userId={props.userId}
+        postDate={orderObj.postDate}
+        title={orderObj.title}
         content={orderObj.content}
       />
     ));
@@ -45,7 +41,12 @@ const Orders = (props) => {
   }
   return (
     <>
-      {props.userId && <NewOrder addNewOrder={addNewOrder} />}
+      {/* {props.userId && <NewOrder addNewOrder={addNewOrder} />} */}
+      <div className="Feed-title">
+        <h2>Orders</h2>
+        <p>Uncover an array of desired items listed by fellow students eager to make a
+          purchase on the Orders page – your go-to destination for campus marketplace aspirations.</p>
+      </div>
       {ordersList}
     </>
   );

@@ -14,37 +14,40 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
           <h2>TechSchmooze</h2>
         </div>
         <div className="NavBar-linkContainer">
-          <div className="NavBar-item"><Link to="/" className="NavBar-link">Home</Link></div>
-          <div className="NavBar-item"><Link to="" className="NavBar-link">Trending</Link></div>
-          <div className="NavBar-item NavBar-dropdown">
+          <div><Link to="/" className="NavBar-link">Home</Link></div>
+          <div><Link to="" className="NavBar-link">Press</Link></div>
+          <div className="NavBar-dropdown">
             <p className="NavBar-linkDrop NavBar-link">Market</p>
             <div className="NavBar-dropContainer">
               <ul>
                 <li><Link className="NavBar-dropitem" to="/sales/">Sales</Link></li>
                 <li><Link className="NavBar-dropitem" to="/orders/">Orders</Link></li>
-                <li><Link className="NavBar-dropitem" to="/borrow/">Borrow</Link></li>
-                <li><Link className="NavBar-dropitem" to="giveaway/">Give away</Link></li>
+                <li><Link className="NavBar-dropitem" to="/borrows/">Borrow</Link></li>
+                <li><Link className="NavBar-dropitem" to="giveaways/">Give away</Link></li>
               </ul>
             </div>
           </div>
-          <div className="NavBar-item"><Link to="" className="NavBar-link">Events</Link></div>
+          <div><Link to="" className="NavBar-link">Chatroom</Link></div>
         </div>
-        <div className="NavBar-loginContainer">
-          <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-            {userId ? (
-              <button
-                className="NavBar-login"
-                onClick={() => {
-                  googleLogout();
-                  handleLogout();
-                }}
-              >
-                Logout
-              </button>
-            ) : (
-              <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />
-            )}
-          </GoogleOAuthProvider>
+        <div className="NavBar-buttonLink">
+          <div><Link to="/post/" className="NavBar-postLink">+ Post</Link></div>
+          <div className="NavBar-loginContainer">
+            <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+              {userId ? (
+                <button
+                  className="NavBar-login"
+                  onClick={() => {
+                    googleLogout();
+                    handleLogout();
+                  }}
+                >
+                  Logout
+                </button>
+              ) : (
+                <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />
+              )}
+            </GoogleOAuthProvider>
+          </div>
         </div>
         </div>
       </nav>

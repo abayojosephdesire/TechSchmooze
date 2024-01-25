@@ -13,6 +13,8 @@ const express = require("express");
 const User = require("./models/user");
 const Order = require("./models/order");
 const Sale = require("./models/sale");
+const Borrow = require("./models/borrow");
+const GiveAway = require("./models/giveaway");
 
 // import authentication library
 const auth = require("./auth");
@@ -32,6 +34,8 @@ router.post("/order", auth.ensureLoggedIn, (req, res) => {
   const newOrder = new Order({
     creator_id: req.user._id,
     creator_name: req.user.name,
+    postDate: req.body.postDate,
+    title: req.body.title,
     content: req.body.content,
   });
 
@@ -46,10 +50,44 @@ router.post("/sale", auth.ensureLoggedIn, (req, res) => {
   const newSale = new Sale({
     creator_id: req.user._id,
     creator_name: req.user.name,
+    postDate: req.body.postDate,
+    title: req.body.title,
     content: req.body.content,
   });
 
   newSale.save().then((sale) => res.send(sale));
+});
+
+// Borrows
+router.get("/borrows", (req, res) => {
+  Borrow.find({}).then((borrows) => res.send(borrows));
+});
+router.post("/borrow", auth.ensureLoggedIn, (req, res) => {
+  const newBorrow = new Borrow({
+    creator_id: req.user._id,
+    creator_name: req.user.name,
+    postDate: req.body.postDate,
+    title: req.body.title,
+    content: req.body.content,
+  });
+
+  newBorrow.save().then((borrow) => res.send(borrow));
+});
+
+// Give aways
+router.get("/giveaways", (req, res) => {
+  GiveAway.find({}).then((giveaways) => res.send(giveaways));
+});
+router.post("/giveaway", auth.ensureLoggedIn, (req, res) => {
+  const newGiveAway = new GiveAway({
+    creator_id: req.user._id,
+    creator_name: req.user.name,
+    postDate: req.body.postDate,
+    title: req.body.title,
+    content: req.body.content,
+  });
+
+  newGiveAway.save().then((giveaway) => res.send(giveaway));
 });
 
 router.post("/login", auth.login);

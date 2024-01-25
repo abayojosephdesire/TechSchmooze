@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import CardSale from "../modules/CardSale.js";
-import { NewSale} from "../modules/NewPostInput.js";
+import Card from "../modules/Card.js";
 import { get } from "../../utilities";
 
 const Sales = (props) => {
@@ -23,20 +22,17 @@ const Sales = (props) => {
     });
   }, []);
 
-  // When the user submits a sale, which is added on the screen immediately
-  const addNewSale = (saleObj) => {
-    setSales([saleObj].concat(sales));
-  };
-
   let salesList = null;
   const hasSales = sales.length !== 0;
   if (hasSales) {
     salesList = sales.map((saleObj) => (
-      <CardSale
+      <Card
         _id={saleObj._id}
         creator_name={saleObj.creator_name}
         creator_id={saleObj.creator_id}
         userId={props.userId}
+        postDate={saleObj.postDate}
+        title={saleObj.title}
         content={saleObj.content}
       />
     ));
@@ -45,7 +41,11 @@ const Sales = (props) => {
   }
   return (
     <>
-      {props.userId && <NewSale addNewSale={addNewSale} />}
+      <div className="Feed-title">
+        <h2>Sales</h2>
+        <p>Browse through a collection of student listings on the Sales page, where classmates are
+          offering various items for purchase – your destination for campus peer-to-peer transactions.</p>
+      </div>
       {salesList}
     </>
   );

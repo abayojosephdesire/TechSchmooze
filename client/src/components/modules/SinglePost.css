@@ -1,0 +1,12 @@
+.Card-container{background-color:#fff;border:2px solid #f0f0f0;margin:20px 0;}
+.Card-section{padding:0 20px;border-bottom:1px solid #d4d4d4;}
+.Card-header, .Card-footer{display:flex;justify-content:space-between;}
+.Card-profile{display:flex;flex-direction:row;}
+.Card-picture{width:37px;height:37px;background-color:#f0f0f0;border-radius:50%;border:1px solid #cbcbcb;}
+.Card-name{padding:10px 0 0 10px;font-size:15px;}
+.Card-date{font-size:13px;}
+.Card-title{font-weight:bold;font-size:17px;}
+.Card-content{font-size:15px;}
+.Card-footer{padding:10px 20px;}
+.Card-comment{background-color:#f0f0f0;border:1px solid #cecece;}
+.Card-message{background-color:#cbcbcb;padding:7px 20px;font-size:14px;}
