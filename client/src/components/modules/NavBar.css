@@ -31,3 +31,20 @@ color:#fff;border:none;border-radius:5px;cursor:default;}
 .Feed-title{color:#6f6f6f;text-align:center;width:800px;margin:auto;}
 .Feed-title h2{margin:0 ;}
 .Feed-title p{margin:5px 0;padding-bottom:20px;}
+
+.PhoneNav-container{display:none;z-index:1;position:fixed;top:67px;height:100%;background-color:rgba(255,255,255,0.9);width:100%;overflow:auto;}
+.PhoneNav-container.show{display:block;}
+.NavBar-showNav, .NavBar-hideNav{background-color:#fff;border:none;display:none;}
+.NavBar-hideNav{color:#b10303;}
+
+.PhoneNav-item{padding:10px 0;}
+.PhoneNav-item > h3{margin:0;padding:0 15px;color:#555;font-family:'Courier New', Courier, monospace;}
+.PhoneNav-link{margin:5px 15px;display:block;font-weight:bold;}
+.PhoneNav-link.active{color:var(--primary);}
+.PhoneNav-account{padding:0 15px;}
+
+@media screen and (max-width:768px){
+    .NavBar-showNav, .NavBar-hideNav{display:block;}
+    .NavBar-title{font-size:17px;margin:20px 10px}
+    .NavBar-buttonLink, .NavBar-linkContainer{display:none;}
+}
