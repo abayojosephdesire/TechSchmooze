@@ -63,16 +63,23 @@ const Discussions = (props) => {
   const column2Items = discussionsArray.filter((_, index) => index % 3 === 1);
   const column3Items = discussionsArray.filter((_, index) => index % 3 === 2);
 
+  const column4Items = discussionsArray.filter((_, index) => index % 2 === 0);
+  const column5Items = discussionsArray.filter((_, index) => index % 2 !== 0);
+
   const discussionsListColumn1 = column1Items.length > 0 ? (
     column1Items
   ) : null;
-
   const discussionsListColumn2 = column2Items.length > 0 ? (
     column2Items
   ) : null;
-
   const discussionsListColumn3 = column3Items.length > 0 ? (
     column3Items
+  ) : null;
+  const discussionsListColumn4 = column4Items.length > 0 ? (
+    column4Items
+  ) : null;
+  const discussionsListColumn5 = column5Items.length > 0 ? (
+    column5Items
   ) : null;
 
   return (
@@ -138,6 +145,16 @@ const Discussions = (props) => {
         {discussionsListColumn3 && (
           <div className="Discussions-listColumn">
             {discussionsListColumn3}
+          </div>
+        )}
+        {discussionsListColumn4 && (
+          <div className="Discussions-phoneColumn">
+            {discussionsListColumn4}
+          </div>
+        )}
+        {discussionsListColumn5 && (
+          <div className="Discussions-phoneColumn">
+            {discussionsListColumn5}
           </div>
         )}
         {!discussionsListColumn1 && !discussionsListColumn2 && !discussionsListColumn3 && (
