@@ -1,0 +1,10 @@
+.Footer-container{background-color:#13263f;}
+.Footer-main, .Footer-copyright > p{max-width:1200px;margin:auto;}
+.Footer-main{display:flex;justify-content:space-between;padding:40px 0;color:#86929f;}
+.Footer-item{padding:60px;}
+.Footer-item1{width:50%;}
+.Footer-item2, .Footer-item3{width:25%;}
+.Footer-item > ul{padding:0;}
+.Footer-item1 > p{text-align:justify;}
+.Footer-copyright{padding:40px 60px;background-color:#000;color:#fff;}
+.Footer-Link{color:#d2d4dd;margin:2px 0;display:inline-block;}

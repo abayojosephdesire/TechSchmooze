@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 import "./NavBar.css";
 
@@ -7,30 +7,37 @@ import "./NavBar.css";
 const GOOGLE_CLIENT_ID = "375397322348-64k2rahhcrctb6gkojf4bdtuunrcp7th.apps.googleusercontent.com";
 
 const NavBar = ({ userId, handleLogin, handleLogout }) => {
+  const location = useLocation();
+  const isActiveLink = (path) => {
+    return location.pathname === path;
+  };
   return (
       <nav className="NavBar-container">
         <div className="NavBar-content">
-        <div className="NavBar-title">
-          <h2>TechSchmooze</h2>
+        <div>
+          <Link to="/"><h2 className="NavBar-title">TechSchmooze</h2></Link>
         </div>
         <div className="NavBar-linkContainer">
-          <div><Link to="/" className="NavBar-link">Home</Link></div>
-          <div><Link to="" className="NavBar-link">Press</Link></div>
-          <div className="NavBar-dropdown">
-            <p className="NavBar-linkDrop NavBar-link">Market</p>
-            <div className="NavBar-dropContainer">
-              <ul>
-                <li><Link className="NavBar-dropitem" to="/sales/">Sales</Link></li>
-                <li><Link className="NavBar-dropitem" to="/orders/">Orders</Link></li>
-                <li><Link className="NavBar-dropitem" to="/borrows/">Borrow</Link></li>
-                <li><Link className="NavBar-dropitem" to="giveaways/">Give away</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div><Link to="" className="NavBar-link">Chatroom</Link></div>
+          <div><Link to="/" className={`NavBar-link ${isActiveLink("/") && "active"}`}>Home</Link></div>
+          <div><Link to="/markets/" className={`NavBar-link ${isActiveLink("/markets/") && "active"}`}>Market</Link></div>
+          <div><Link to="/presses/" className={`NavBar-link ${isActiveLink("/presses/") && "active"}`}>Press</Link></div>
+          <div><Link to="/discussions/" className={`NavBar-link ${isActiveLink("/discussions/") && "active"}`}>Discussions</Link></div>
+          <div><Link to="/messages/" className={`NavBar-link ${isActiveLink("/messages/") && "active"}`}>Messages</Link></div>
         </div>
         <div className="NavBar-buttonLink">
-          <div><Link to="/post/" className="NavBar-postLink">+ Post</Link></div>
+          <div className="NavBar-dropdown">
+            <button className="NavBar-addButton NavBar-linkDrop">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Add
+            </button>
+            <div className="NavBar-dropContainer">
+              <div><Link to="/post/" className="NavBar-dropitem">Post on Market</Link></div>
+              <div><Link to="/postdiscussion/" className="NavBar-dropitem">Start a discussion</Link></div>
+            </div>
+          </div>
           <div className="NavBar-loginContainer">
             <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
               {userId ? (

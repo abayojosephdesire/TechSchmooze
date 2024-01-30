@@ -8,13 +8,17 @@
 */
 
 const express = require("express");
+const multer = require("multer");
+const app = express();
 
 // import models so we can interact with the database
 const User = require("./models/user");
-const Order = require("./models/order");
-const Sale = require("./models/sale");
-const Borrow = require("./models/borrow");
-const GiveAway = require("./models/giveaway");
+const Press = require("./models/press");
+const Market = require("./models/market");
+const Discussion = require("./models/discussion");
+const Comment = require("./models/comment");
+const Message = require("./models/message");
+const DiscussionMessage = require("./models/discussionMessage");
 
 // import authentication library
 const auth = require("./auth");
@@ -25,69 +29,86 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 
-
-// Orders
-router.get("/orders", (req, res) => {
-  Order.find({}).then((orders) => res.send(orders));
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
 });
-router.post("/order", auth.ensureLoggedIn, (req, res) => {
-  const newOrder = new Order({
+const upload = multer({ storage: storage });
+
+// Presses
+router.get("/presses", (req, res) => {
+  Press.find({}).then((presses) => res.send(presses));
+});
+router.post("/press", auth.ensureLoggedIn, (req, res) => {
+  const newPress = new Press({
     creator_id: req.user._id,
     creator_name: req.user.name,
     postDate: req.body.postDate,
+    type: req.body.type,
     title: req.body.title,
     content: req.body.content,
   });
 
-  newOrder.save().then((order) => res.send(order));
+  newPress.save().then((press) => res.send(press));
 });
 
-// Sales
-router.get("/sales", (req, res) => {
-  Sale.find({}).then((sales) => res.send(sales));
+// Markets
+router.get("/markets", (req, res) => {
+  Market.find({}).then((markets) => res.send(markets));
 });
-router.post("/sale", auth.ensureLoggedIn, (req, res) => {
-  const newSale = new Sale({
+router.post("/market", auth.ensureLoggedIn, upload.single("image"), (req, res) => {
+  const newMarket = new Market({
     creator_id: req.user._id,
     creator_name: req.user.name,
     postDate: req.body.postDate,
+    type: req.body.type,
     title: req.body.title,
     content: req.body.content,
+    category: req.body.category,
+    condition: req.body.condition,
+    price: req.body.price,
+    image: req.file ? `/uploads/${req.file.filename}` : null,
+
   });
-
-  newSale.save().then((sale) => res.send(sale));
+  newMarket.save().then((market) => res.send(market));
 });
 
-// Borrows
-router.get("/borrows", (req, res) => {
-  Borrow.find({}).then((borrows) => res.send(borrows));
+// Discussions
+router.get("/discussions", (req, res) => {
+  Discussion.find({}).then((discussions) => res.send(discussions));
 });
-router.post("/borrow", auth.ensureLoggedIn, (req, res) => {
-  const newBorrow = new Borrow({
+router.post("/discussion", auth.ensureLoggedIn, (req, res) => {
+  const newDiscussion = new Discussion({
     creator_id: req.user._id,
     creator_name: req.user.name,
     postDate: req.body.postDate,
-    title: req.body.title,
     content: req.body.content,
+    category: req.body.category,
   });
 
-  newBorrow.save().then((borrow) => res.send(borrow));
+  newDiscussion.save().then((discussion) => res.send(discussion));
 });
 
-// Give aways
-router.get("/giveaways", (req, res) => {
-  GiveAway.find({}).then((giveaways) => res.send(giveaways));
+// Comments
+router.get("/comment", (req, res) => {
+  Comment.find({ parent: req.query.parent }).then((comments) => {
+    res.send(comments);
+  });
 });
-router.post("/giveaway", auth.ensureLoggedIn, (req, res) => {
-  const newGiveAway = new GiveAway({
+
+router.post("/comment", auth.ensureLoggedIn, (req, res) => {
+  const newComment = new Comment({
     creator_id: req.user._id,
     creator_name: req.user.name,
-    postDate: req.body.postDate,
-    title: req.body.title,
+    parent: req.body.parent,
     content: req.body.content,
   });
 
-  newGiveAway.save().then((giveaway) => res.send(giveaway));
+  newComment.save().then((comment) => res.send(comment));
 });
 
 router.post("/login", auth.login);
@@ -114,9 +135,68 @@ router.post("/initsocket", (req, res) => {
   res.send({});
 });
 
-// |------------------------------|
-// | write your API methods below!|
-// |------------------------------|
+
+// DiscussionMessages
+router.get("/discussionMessages", (req, res) => {
+  DiscussionMessage.find({ discussionId: req.query.discussionId }).then((discussionMessages) => res.send(discussionMessages));
+});
+
+router.post("/discussionMessage", auth.ensureLoggedIn, (req, res) => {
+  const discussionMessage = new DiscussionMessage({
+    discussionId: req.body.discussionId,
+    sender: {
+      _id: req.user._id,
+      name: req.user.name,
+    },
+    content: req.body.content,
+  });
+  discussionMessage.save().then((newDiscussionMessage) => {
+    socketManager.roomBroadcast(req.body.discussionId, newDiscussionMessage);
+  });
+});
+
+router.post("/addUserToRoom", auth.ensureLoggedIn, (req, res) => {
+  socketManager.addUserToRoom(req.body.userId, req.body.discussionId);
+
+});
+
+router.post("/removeUserFromRoom", auth.ensureLoggedIn, (req, res) => {
+  socketManager.removerUserFromRoom(req.user._id);
+});
+
+// Messages
+router.get("/messages", (req, res) => {
+  const query = {
+    $or: [
+      { "sender._id": req.user._id, "recipient._id": req.query.recipient_id },
+      { "sender._id": req.query.recipient_id, "recipient._id": req.user._id },
+    ],
+  };
+
+  Message.find(query).then((messages) => res.send(messages));
+});
+
+router.post("/message", auth.ensureLoggedIn, (req, res) => {
+  const message = new Message({
+    recipient: req.body.recipient,
+    sender: {
+      _id: req.user._id,
+      name: req.user.name,
+    },
+    content: req.body.content,
+  });
+  message.save();
+
+  socketManager.getSocketFromUserID(req.user._id).emit("message", message);
+  if (req.user._id !== req.body.recipient._id && socketManager.userToSocketMap.hasOwnProperty(req.body.recipient._id)) {
+    socketManager.getSocketFromUserID(req.body.recipient._id).emit("message", message);
+  }
+});
+
+// All users
+router.get("/allUsers", (req, res) => {
+  User.find({}).then((users) => res.send({ allUsers : users }));
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

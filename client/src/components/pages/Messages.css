@@ -1,0 +1,3 @@
+.Messages-container{display:flex;height:85vh;}
+.Messages-chatList{min-width:250px;background-color:#f4f4f4;}
+.Messages-chats{flex:1;background-color:#fff;width:100%;}

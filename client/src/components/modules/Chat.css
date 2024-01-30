@@ -1,0 +1,4 @@
+.Chat-container{position:relative;height:100%;width:100%;}
+.Chat-title{padding:15px;margin:0;background-color:#f0f0f0;}
+.Chat-messageList{padding:10px 20px;max-height:68vh;overflow:auto;}
+.Chat-newMessage{position:absolute;bottom:10px;width:100%;}

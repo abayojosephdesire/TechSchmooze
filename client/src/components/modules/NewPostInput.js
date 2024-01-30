@@ -3,88 +3,150 @@ import "./NewPostInput.css";
 import { useNavigate } from "react-router-dom";
 import { post } from "../../utilities";
 
-// New order input
 const NewPostInput = (props) => {
-  const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const [selectedType, setSelectedType] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCondition, setSelectedCondition] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
-
   const handleContentChange = (event) => {
     setContent(event.target.value);
   };
-
   const handleTypeChange = (event) => {
     setSelectedType(event.target.value);
   };
-
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+  const handleConditionChange = (event) => {
+    setSelectedCondition(event.target.value);
+  };
+  const handlePriceChange = (event) => {
+    setSelectedPrice(event.target.value);
+  };
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(file);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Check if a type is selected before proceeding
-    if (!selectedType) {
-      alert("Please select a type of your post before submitting.");
+    if (!selectedType || !selectedCategory || !selectedCondition || !selectedPrice) {
+      alert("Please select all the post filters.");
       return;
     }
 
     // Current time
     const currentDate = new Date().toISOString();
+    props.onMarketSubmit && props.onMarketSubmit({
+      title,
+      content,
+      postDate: currentDate,
+      type:selectedType,
+      category:selectedCategory,
+      condition:selectedCondition,
+      price:selectedPrice,
+      image:selectedImage,
+    });
 
-    // Conditionally call different functions based on the selected type
-    if (selectedType === "sale") {
-      props.onSaleSubmit && props.onSaleSubmit({ title, content, postDate: currentDate });
-    } else if (selectedType === "order") {
-      props.onOrderSubmit && props.onOrderSubmit({ title, content, postDate: currentDate });
-    } else if (selectedType === "borrow") {
-      props.onBorrowSubmit && props.onBorrowSubmit({ title, content, postDate: currentDate });
-    } else if (selectedType === "giveaway") {
-      props.onGiveAwaySubmit && props.onGiveAwaySubmit({ title, content, postDate: currentDate });
-    }
-
-    setContent("");
     setTitle("");
+    setContent("");
     setSelectedType("");
+    setSelectedCategory("");
+    setSelectedCondition("");
+    setSelectedPrice("");
+    setSelectedImage("");
   };
 
   return (
-    <div className="NewPostinput-container">
-      <div className="Feed-title">
-        <h2>Post</h2>
-        <p>Empower your voice and share your needs, offerings, and events with our dynamic platform,
-          providing you the opportunity to post orders, sales, events, and more.</p>
+    <div className="NewPostInput-container">
+      <div className="NewPostInput-filters">
+        <div className="NewPostInput-filtersTitle">
+          <h2>Post filters</h2>
+        </div>
+        <div className="NewPostInput-filtersItem">
+          <label>Type</label>
+          <select value={selectedType} onChange={handleTypeChange}>
+            <option value="">Select Type</option>
+            <option value="Sale">Sale</option>
+            <option value="Order">Order</option>
+            <option value="Borrow">Borrow</option>
+            <option value="Share">Share</option>
+            <option value="Give away">Give away</option>
+          </select>
+        </div>
+        <div className="NewPostInput-filtersItem">
+          <label>Category</label>
+          <select value={selectedCategory} onChange={handleCategoryChange}>
+            <option value="">Select Category</option>
+            <option value="Academics">Academics</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Furniture">Furniture</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Ticket">Ticket</option>
+            <option value="Art">Art</option>
+            <option value="Transportation">Transportation</option>
+          </select>
+        </div>
+        <div className="NewPostInput-filtersItem">
+          <label>Condition</label>
+          <select value={selectedCondition} onChange={handleConditionChange}>
+            <option value="">Select Category</option>
+            <option value="Excellent">Excellent</option>
+            <option value="Fair">Fair</option>
+            <option value="Bad">Bad</option>
+          </select>
+        </div>
+        <div className="NewPostInput-filtersItem">
+          <label>Price range</label>
+          <select value={selectedPrice} onChange={handlePriceChange}>
+            <option value="">Select Price</option>
+            <option value="< 10">&lt; 10</option>
+            <option value="10 - 30">10 - 30</option>
+            <option value="30 - 60">30 - 60</option>
+            <option value="60 - 100">60 - 100</option>
+            <option value="100 - 500">100 - 500</option>
+            <option value="500 - 1000">500 - 1000</option>
+            <option value="> 1000">&gt; 1000</option>
+          </select>
+        </div>
       </div>
-      <input
-        type="text"
-        placeholder={props.defaultTitle}
-        value={title}
-        onChange={handleTitleChange}
-        className="NewPostInput-title"
-      />
-      <textarea
-        rows="10"
-        placeholder={props.defaultBody}
-        value={content}
-        onChange={handleContentChange}
-        className="NewPostInput-body"
-      />
-      <select className="NewPostInput-type" value={selectedType} onChange={handleTypeChange}>
-        <option value="">Select Type</option>
-        <option value="sale">Sale</option>
-        <option value="order">Order</option>
-        <option value="borrow">Borrow</option>
-        <option value="giveaway">Give away</option>
-      </select>
-      <button
-        type="submit"
-        value="Submit"
-        onClick={handleSubmit}
-        className="NewPostInput-submit"
-      >
-        Post
-      </button>
+      <div className="NewPostInput-message">
+        <input
+          type="text"
+          placeholder={props.defaultTitle}
+          value={title}
+          onChange={handleTitleChange}
+          className="NewPostInput-title"
+        />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="NewPostInput-imageInput"
+        />
+        <textarea
+          rows="20"
+          placeholder={props.defaultBody}
+          value={content}
+          onChange={handleContentChange}
+          className="NewPostInput-body"
+        />
+        <button
+          type="submit"
+          value="Submit"
+          onClick={handleSubmit}
+          className="NewPostInput-submit"
+        >
+          Post
+        </button>
+      </div>
     </div>
   );
 };
@@ -92,29 +154,9 @@ const NewPostInput = (props) => {
 // New post
 const NewPost = (props) => {
   const navigate = useNavigate();
-
-  // Define different functions for each type
-  const addSale = (body) => {
-    post("/api/sale", body).then(() => {
-      navigate("/sales/");
-    });
-  };
-
-  const addOrder = (body) => {
-    post("/api/order", body).then(() => {
-      navigate("/orders/");
-    });
-  };
-
-  const addBorrow = (body) => {
-    post("/api/borrow", body).then(() => {
-      navigate("/borrows/");
-    });
-  };
-
-  const addGiveAway = (body) => {
-    post("/api/giveaway", body).then(() => {
-      navigate("/giveaways/");
+  const addMarket = (body) => {
+    post("/api/market", body).then(() => {
+      navigate("/markets/");
     });
   };
 
@@ -122,10 +164,7 @@ const NewPost = (props) => {
     <NewPostInput
       defaultTitle="Title"
       defaultBody="Body text"
-      onSaleSubmit={addSale}
-      onOrderSubmit={addOrder}
-      onBorrowSubmit={addBorrow}
-      onGiveAwaySubmit={addGiveAway}
+      onMarketSubmit={addMarket}
     />
   );
 };

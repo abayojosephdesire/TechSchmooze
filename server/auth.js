@@ -47,14 +47,16 @@ function login(req, res) {
 }
 
 function logout(req, res) {
-  const userSocket = socketManager.getSocketFromUserID(req.user._id);
-  if (userSocket) {
-    // delete user's socket if they logged out
-    socketManager.removeUser(req.user, userSocket);
-  }
+  if (req.user){
+    const userSocket = socketManager.getSocketFromUserID(req.user._id);
+    if (userSocket) {
+      // delete user's socket if they logged out
+      socketManager.removeUser(req.user, userSocket);
+    }
 
-  req.session.user = null;
-  res.send({});
+    req.session.user = null;
+    res.send({});
+  }
 }
 
 function populateCurrentUser(req, res, next) {

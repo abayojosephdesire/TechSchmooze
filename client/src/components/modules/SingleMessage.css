@@ -1,0 +1,5 @@
+.SingleMessage-container{background-color:#f4f4f4;margin:7px 0;display:inline-block;border-radius:7px 7px 0 0;}
+.SingleMessage-container > p{margin:0;}
+.SingleMessage-title{font-size:14px;color:#8c8c8c;padding:5px;}
+.SingleMessage-date{color:#b9b9b9;font-size:13px;}
+.SingleMessage-text{background-color:#f0f0f0;padding:10px;border-radius:0 0 7px 7px;}

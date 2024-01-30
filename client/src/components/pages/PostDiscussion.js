@@ -1,8 +1,8 @@
 import React, {useEffect} from "react";
-import { NewPost} from "../modules/NewPostInput.js";
+import { NewPostDiscussion} from "../modules/NewPostDiscussionInput.js";
 import { useNavigate } from "react-router-dom";
 
-const Post = (props) => {
+const PostDiscussion = (props) => {
   const navigate = useNavigate();
   useEffect(() => {
     if (!props.userId) {
@@ -11,13 +11,13 @@ const Post = (props) => {
   }, [props.userId, navigate]);
 
   useEffect(() => {
-    document.title = "Post"
+    document.title = "Start a discussion"
   }, []);
   return (
     <>
-        {props.userId && <NewPost />}
+        {props.userId && <NewPostDiscussion />}
     </>
   );
 }
 
-export default Post;
+export default PostDiscussion;

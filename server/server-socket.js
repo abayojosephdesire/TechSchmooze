@@ -2,7 +2,10 @@ let io;
 
 const userToSocketMap = {}; // maps user ID to socket object
 const socketToUserMap = {}; // maps socket ID to user object
+const allRooms = {}
+const userToRoomMap = {}
 
+const getAllConnectedUsers = () => Object.values(socketToUserMap);
 const getSocketFromUserID = (userid) => userToSocketMap[userid];
 const getUserFromSocketID = (socketid) => socketToUserMap[socketid];
 const getSocketFromSocketID = (socketid) => io.sockets.connected[socketid];
@@ -20,8 +23,40 @@ const addUser = (user, socket) => {
   socketToUserMap[socket.id] = user;
 };
 
+const addUserToRoom = (userId, discussionId) => {
+  if (!(discussionId in allRooms)) {
+    allRooms[discussionId]=[];
+  }
+  allRooms[discussionId].push(userId);
+  userToRoomMap[userId] = discussionId;
+};
+
+const removerUserFromRoom = (user) => {
+  const discussionId = userToRoomMap[user._id];
+  if (!discussionId){
+    return;
+  }
+  const index = allRooms.indexOf(discussionId);
+  if (index !== -1) {
+    allRooms.splice(index, 1);
+  }
+  delete userToRoomMap[user._id];
+};
+
+const roomBroadcast = (discussionId, discussionMessage) => {
+  console.log(allRooms[discussionId]);
+  for (const userId of allRooms[discussionId]) {
+    const socket = getSocketFromUserID(userId);
+    if (socket){
+      socket.emit("discussionMessage", discussionMessage);
+    }
+
+  }
+};
+
 const removeUser = (user, socket) => {
   if (user) delete userToSocketMap[user._id];
+  removerUserFromRoom(user);
   delete socketToUserMap[socket.id];
 };
 
@@ -40,9 +75,14 @@ module.exports = {
 
   addUser: addUser,
   removeUser: removeUser,
+  userToSocketMap: userToSocketMap,
+  roomBroadcast,
+  removerUserFromRoom,
+  addUserToRoom,
 
   getSocketFromUserID: getSocketFromUserID,
   getUserFromSocketID: getUserFromSocketID,
   getSocketFromSocketID: getSocketFromSocketID,
+  getAllConnectedUsers: getAllConnectedUsers,
   getIo: () => io,
 };

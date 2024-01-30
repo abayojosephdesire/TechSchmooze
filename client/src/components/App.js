@@ -6,11 +6,14 @@ import { socket } from "../client-socket.js";
 import { get, post } from "../utilities";
 import NavBar from "./modules/NavBar.js";
 import Home from "./pages/Home.js";
-import Orders from "./pages/Orders.js";
-import Sales from "./pages/Sales.js";
-import Borrows from "./pages/Borrows.js";
-import GiveAways from "./pages/GiveAways.js";
+import Presses from "./pages/Presses.js";
+import Markets from "./pages/Markets.js";
+import Discussions from "./pages/Discussions.js";
+import DiscussionMessages from "./pages/DiscussionMessages.js";
+import Messages from "./pages/Messages.js";
 import Post from "./pages/Post.js";
+import PostDiscussion from "./pages/PostDiscussion.js";
+import Footer from "./modules/Footer.js";
 import NotFound from "./pages/NotFound.js";
 import "../utilities.css";
 import "./App.css";
@@ -21,7 +24,6 @@ const App = () => {
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
-        // they are registed in the database, and currently logged in.
         setUserId(user._id);
       }
     });
@@ -49,14 +51,17 @@ const App = () => {
       <div class="App-container">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/orders/" element={<Orders userId={userId} />} />
-          <Route path="/sales/" element={<Sales userId={userId} />} />
-          <Route path="/borrows/" element={<Borrows userId={userId} />} />
-          <Route path="/giveaways/" element={<GiveAways userId={userId} />} />
+          <Route path="/presses/" element={<Presses userId={userId} />} />
+          <Route path="/markets/" element={<Markets userId={userId} />} />
+          <Route path="/discussions/" element={<Discussions userId={userId} />} />
+          <Route path="/messages/" element={<Messages userId={userId} />} />
           <Route path="/post/" element={<Post userId={userId} />} />
+          <Route path="/postdiscussion/" element={<PostDiscussion userId={userId} />} />
+          <Route path="/discussionMessages/" element={<DiscussionMessages userId={userId} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
+      <Footer />
     </>
   );
 };

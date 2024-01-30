@@ -1,0 +1,11 @@
+.Markets-container{display:flex;max-width:1000px;}
+.Markets-container > div{padding:0 40px;}
+.Markets-filters{width:30%;}
+.Markets-list{width:70%;}
+.Markets-filtersTitle{color:#717171;}
+.Markets-filtersItem{padding:10px 0;}
+.Markets-filtersItem > h4{margin:0;}
+.Markets-filtersItem > ul{list-style:none;padding:0;margin:0;}
+.Markets-filtersItem > ul > li{padding:3px 5px;}
+.Markets-filtersLabel{font-size:15px;}
+.Markets-nothing{padding:20px 0;}

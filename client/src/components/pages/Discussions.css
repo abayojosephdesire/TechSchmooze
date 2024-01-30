@@ -1,0 +1,9 @@
+.Discussions-container{display:flex;max-width:1200px;}
+.Discussions-container > div{padding:0 40px;}
+.Discussions-filters{width:30%;}
+.Discussions-list{width:70%;display:grid;grid-template-columns:1fr 1fr 1fr;grid-gap:20px;margin:10px 0;}
+.Discussions-filtersItem{padding:10px 0;}
+.Discussions-filtersItem > ul{list-style:none;padding:0;margin:0;}
+.Discussions-filtersItem > ul > li{padding:3px 5px;}
+.Discussions-filtersLabel{font-size:15px;}
+.Discussions-nothing{padding:20px 0;}

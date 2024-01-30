@@ -1,0 +1,8 @@
+.CommentsBlock-container{background-color:#f5f5f5;border-radius:0 0 20px 20px;}
+.CommentsBlock-title{padding:10px 15px;display:flex;justify-content:space-between;}
+.CommentsBlock-commentButton, .CommentsBlock-message{width:80%;padding:6px 15px;background-color:#fff;border:1px solid #c8c8c8;font-size:14px;text-align:center;display:block;}
+.CommentsBlock-commentButton:hover, .CommentsBlock-message:hover{background-color:#c8c8c8;}
+.CommentsBlock-message{float:right;}
+.CommentsBlock-titleComments{width:25%;}
+.CommentsBlock-titleInput{width:50%;}
+.CommentsBlock-titleMessage{width:25%;}

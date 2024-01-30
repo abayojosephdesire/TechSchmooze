@@ -1,0 +1,3 @@
+.SingleUser-container{padding:12px 15px;border-bottom:2px solid #fff;cursor:pointer;font-size:15px;font-weight:bold;color:#505050;}
+.SingleUser-container:hover{background-color:#dfdfdf;}
+.SingleUser-container.active{background-color:#dfdfdf;}
