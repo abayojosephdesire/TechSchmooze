@@ -1,28 +1,16 @@
-.Home-section{max-width:1200px;margin:auto;}
-.Home-sectionTitle{font-size:50px;font-weight:bold;font-family:Impact, sans-serif;letter-spacing:2px;color:#4e4e4e;}
-.Home-section2 > div > h1, .Home-section3 > div > h1{font-size:40px;}
+.Footer-container{background-color:#13263f;}
+.Footer-main, .Footer-copyright > p{max-width:1200px;margin:auto;}
+.Footer-main{display:flex;justify-content:space-between;padding:40px 0;color:#86929f;}
+.Footer-item{padding:60px;}
+.Footer-item1{width:50%;}
+.Footer-item2, .Footer-item3{width:25%;}
+.Footer-item > ul{padding:0;}
+.Footer-item1 > p{text-align:justify;}
+.Footer-copyright{padding:40px 60px;background-color:#000;color:#fff;}
+.Footer-Link{color:#d2d4dd;margin:2px 0;display:inline-block;}
 
-/* Section 1 */
-.Home-section1Image {background-image:url('../images/HomeWelcome.jpeg');background-size:cover;background-position:center;background-repeat:no-repeat;height:650px;opacity:0.3;}
-.Home-section1{position:relative;}
-.Home-section1Text{position:absolute;width:600px;top:60%;left:50%;transform:translate(-50%,-50%);}
-.Home-section1Text > h1 > p{margin:0;}
-.Home-section1Text > p{font-size:20px;}
-.Home-section1Links{padding:0;display:flex;justify-content:space-between;}
-.Home-section1Link{background-color:#fff;border:3px solid var(--primary);padding:7px 0;text-align:center;font-size:15px;width:120px;display:block;border-radius:5px;}
-.Home-section1Link:hover{background-color:var(--primary);color:#fff;}
-
-/* Section 2 */
-.Home-section2{padding:100px 50px;}
-.Home-section2 > div > p{line-height:25px;font-size:17px;text-align:justify;}
-
-.Home-section3{background-color:#fff;padding:70px 50px;}
-.Home-section3Container{display:grid;grid-template-columns:auto auto auto;grid-gap:40px;}
-.Home-section3Item{border:2px solid #f0f0f0;}
-.Home-section3Item > div{background-size:cover;background-position:center;background-repeat:no-repeat;height:200px;width:100%;}
-.Home-section3MarketImage{background-image:url('../images/HomeMarket.jpeg');}
-.Home-section3PressImage{background-image:url('../images/HomePress.jpeg');}
-.Home-section3DiscussionImage{background-image:url('../images/HomeDiscussion.jpeg');}
-.Home-section3MessageImage{background-image:url('../images/HomeMessage.jpeg');}
-.Home-section3Item > p{padding:10px 15px;text-align:justify;}
-.Home-section3Link{background-color:var(--primary);color:#fff;padding:8px 0;text-align:center;width:50%;display:block;margin:0 auto 20px;border-radius:15px;}
+@media screen and (max-width:768px){
+    .Footer-main{display:grid;grid-template-columns:auto auto;}
+    .Footer-item{padding:20px 30px;}
+    .Footer-item1{grid-column:span 2;width:100%;}
+}
