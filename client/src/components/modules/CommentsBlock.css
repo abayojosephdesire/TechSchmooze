@@ -6,3 +6,12 @@
 .CommentsBlock-titleComments{width:25%;}
 .CommentsBlock-titleInput{width:50%;}
 .CommentsBlock-titleMessage{width:25%;}
+
+@media screen and (max-width:768px){
+    .CommentsBlock-title{display:grid;grid-template-columns:1fr 1fr;}
+    .CommentsBlock-title > div{width:100%;}
+    .CommentsBlock-titleComments{grid-area:1/1/2/2;}
+    .CommentsBlock-titleInput{grid-area:2/1/3/3;margin-top:10px;}
+    .CommentsBlock-titleMessage{grid-area:1/2/2/3;}
+    .CommentsBlock-commentButton, .CommentsBlock-message{width:90%;}
+}
