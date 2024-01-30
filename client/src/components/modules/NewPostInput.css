@@ -12,3 +12,8 @@
 .NewPostInput-body{resize:none;}
 .NewPostInput-submit{float:right;background-color:var(--primary);padding:8px 20px;border:none;color:#fff;
 font-size:15px;font-weight:bold;width:30%;margin-top:5px;}
+
+@media screen and (max-width:768px){
+    .NewPostInput-container{display:grid;grid-template-columns:auto;}
+    .NewPostInput-filters, .NewPostInput-message{width:100%;}
+}

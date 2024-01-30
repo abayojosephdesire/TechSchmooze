@@ -38,8 +38,8 @@ color:#fff;border:none;border-radius:5px;cursor:default;}
 .NavBar-hideNav{color:#b10303;}
 
 .PhoneNav-item{padding:10px 0;}
-.PhoneNav-item > h3{margin:0;padding:0 15px;color:#555;font-family:'Courier New', Courier, monospace;}
-.PhoneNav-link{margin:5px 15px;display:block;font-weight:bold;}
+.PhoneNav-item > h3{margin:0;padding:0 15px;font-family:'Courier New', Courier, monospace;}
+.PhoneNav-link{margin:7px 15px;display:block;font-weight:bold;color:#555;}
 .PhoneNav-link.active{color:var(--primary);}
 .PhoneNav-account{padding:0 15px;}
 

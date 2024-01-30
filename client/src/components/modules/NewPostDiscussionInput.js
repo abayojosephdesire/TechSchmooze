@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { post } from "../../utilities";
+import "./NewPostDiscussionInput.css";
 
 const NewPostDiscussionInput = (props) => {
   const [content, setContent] = useState("");
@@ -67,7 +68,7 @@ const NewPostDiscussionInput = (props) => {
           type="submit"
           value="Submit"
           onClick={handleSubmit}
-          className="NewPostInput-submit"
+          className="NewPostDiscussionInput-submit NewPostInput-submit"
         >
           Add a discussion
         </button>

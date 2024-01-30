@@ -1,3 +1,7 @@
-.Messages-container{display:flex;height:85vh;}
-.Messages-chatList{min-width:250px;background-color:#f4f4f4;}
+.Messages-container{display:flex;height:80vh;}
+.Messages-chatList{width:250px;background-color:#f4f4f4;}
 .Messages-chats{flex:1;background-color:#fff;width:100%;}
+
+@media screen and (max-width:768px){
+    .Messages-chatList{width:100px;}
+}
