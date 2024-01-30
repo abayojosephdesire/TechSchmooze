@@ -44,7 +44,6 @@ const removerUserFromRoom = (user) => {
 };
 
 const roomBroadcast = (discussionId, discussionMessage) => {
-  console.log(allRooms[discussionId]);
   for (const userId of allRooms[discussionId]) {
     const socket = getSocketFromUserID(userId);
     if (socket){

@@ -9,3 +9,9 @@
 .Markets-filtersItem > ul > li{padding:3px 5px;}
 .Markets-filtersLabel{font-size:15px;}
 .Markets-nothing{padding:20px 0;}
+
+@media screen and (max-width:768px){
+    .Markets-container > div{padding:0 20px;}
+    .Markets-filters{display:none;}
+    .Markets-list{width:100%;}
+}

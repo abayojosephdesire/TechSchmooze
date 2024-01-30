@@ -9,3 +9,8 @@
 .SinglePost-title{font-weight:bold;font-size:17px;}
 .SinglePost-content{font-size:15px;}
 .SinglePost-footer{padding:10px 20px;}
+
+@media screen and (max-width:768px){
+    .SinglePost-filtersList > span{margin:3px;display:inline-block;}
+    .SinglePost-date{display:none;}
+}

@@ -3,7 +3,7 @@
 .Home-section2 > div > h1, .Home-section3 > div > h1{font-size:40px;}
 
 /* Section 1 */
-.Home-section1Image {background-image:url('../images/HomeWelcome.jpeg');background-size:cover;background-position:center;background-repeat:no-repeat;height:650px;opacity:0.3;}
+.Home-section1Image{background-image:url('../images/HomeWelcome.jpeg');background-size:cover;background-position:center;background-repeat:no-repeat;height:650px;opacity:0.3;}
 .Home-section1{position:relative;}
 .Home-section1Text{position:absolute;width:600px;top:60%;left:50%;transform:translate(-50%,-50%);}
 .Home-section1Text > h1 > p{margin:0;}
@@ -26,3 +26,17 @@
 .Home-section3MessageImage{background-image:url('../images/HomeMessage.jpeg');}
 .Home-section3Item > p{padding:10px 15px;text-align:justify;}
 .Home-section3Link{background-color:var(--primary);color:#fff;padding:8px 0;text-align:center;width:50%;display:block;margin:0 auto 20px;border-radius:15px;}
+
+@media screen and (max-width:768px){
+    .Home-section1Image{height:750px;}
+    .Home-section1Text{width:80%;top:50%;}
+    .Home-section1Links{display:grid;grid-template-columns:auto auto;grid-gap:20px;}
+    .Home-section1Link{width:150px;}
+
+    .Home-section2{padding:60px 20px;}
+    .Home-section2 > div > p{font-size:19px;line-height:30px;}
+
+    .Home-section3{padding:70px 30px;}
+    .Home-section3Container{grid-template-columns:auto;}
+    .Home-section3Item > p{font-size:17px;line-height:23px;}
+}

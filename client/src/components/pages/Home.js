@@ -16,7 +16,7 @@ const Home = () => {
           <ul className="Home-section1Links">
             <li><Link to="/markets/" className="Home-section1Link">Market</Link></li>
             <li><Link to="/presses/" className="Home-section1Link">Press</Link></li>
-            <li><Link to="" className="Home-section1Link">Discussions</Link></li>
+            <li><Link to="/discussions/" className="Home-section1Link">Discussions</Link></li>
             <li><Link to="/messages/" className="Home-section1Link">Messages</Link></li>
           </ul>
         </div>
@@ -54,7 +54,7 @@ const Home = () => {
             <div className="Home-section3DiscussionImage"></div>
             <p>Engage in lively discussions on the Discussions page, where MIT students come together to share insights, thoughts,
               and experiences, creating a dynamic space for diverse conversations about campus life and beyond.</p>
-            <Link to="" className="Home-section3Link">Discussions</Link>
+            <Link to="/discussions/" className="Home-section3Link">Discussions</Link>
           </div>
           <div className="Home-section3Item">
             <div className="Home-section3MessageImage"></div>
