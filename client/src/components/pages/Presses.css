@@ -1,1 +1,5 @@
 .Presses-container{max-width:750px;padding:30px 60px;}
+
+@media screen and (max-width:768px){
+    .Presses-container{padding:20px;}
+}
