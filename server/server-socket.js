@@ -38,16 +38,16 @@ const removerUserFromRoom = (user) => {
   if (!discussionId){
     return;
   }
-  // const index = allRooms.indexOf(discussionId);
-  // if (index !== -1) {
-  //   allRooms.splice(index, 1);
-  // }
-  // delete userToRoomMap[user._id];
-  // const discussionId = userToRoomMap[user._id];
-  if (allRooms.hasOwnProperty(discussionId)) {
-    delete allRooms[discussionId];
+  const index = allRooms.indexOf(discussionId);
+  if (index !== -1) {
+    allRooms.splice(index, 1);
   }
   delete userToRoomMap[user._id];
+  // const discussionId = userToRoomMap[user._id];
+  // if (allRooms.hasOwnProperty(discussionId)) {
+  //   delete allRooms[discussionId];
+  // }
+  // delete userToRoomMap[user._id];
 
 
 
