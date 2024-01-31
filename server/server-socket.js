@@ -32,6 +32,8 @@ const addUserToRoom = (userId, discussionId) => {
 };
 
 const removerUserFromRoom = (user) => {
+  // console.log(user);
+  // console.log("yessssssssss");
   const discussionId = userToRoomMap[user._id];
   if (!discussionId){
     return;
