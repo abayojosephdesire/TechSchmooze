@@ -16,6 +16,7 @@ const Markets = (props) => {
 
   useEffect(() => {
     if (!props.userId) {
+      // alert("You have to login first");
       navigate("/");
     }
   }, [props.userId]);
@@ -51,25 +52,27 @@ const Markets = (props) => {
       (selectedFilters.price.length === 0 || selectedFilters.price.includes(marketObj.price))
     );
   });
-
+  console.log(markets[10]);
   const marketsList = filteredMarkets.length > 0 ? (
-    filteredMarkets.map((marketObj) => (
-      <Card
-        key={marketObj._id}
-        _id={marketObj._id}
-        creator_name={marketObj.creator_name}
-        creator_id={marketObj.creator_id}
-        userId={props.userId}
-        postDate={marketObj.postDate}
-        title={marketObj.title}
-        content={marketObj.content}
-        type={marketObj.type}
-        category={marketObj.category}
-        condition={marketObj.condition}
-        price={marketObj.price}
-        file={marketObj.file}
-      />
-    ))
+    filteredMarkets.map((_marketObj) => {
+      const marketObj = _marketObj.market;
+      return <Card
+      key={marketObj._id}
+      _id={marketObj._id}
+      creator_name={marketObj.creator_name}
+      creator_id={marketObj.creator_id}
+      userId={props.userId}
+      postDate={marketObj.postDate}
+      title={marketObj.title}
+      content={marketObj.content}
+      type={marketObj.type}
+      category={marketObj.category}
+      condition={marketObj.condition}
+      price={marketObj.price}
+      file={_marketObj.file}
+    />
+    }
+    )
   ) : (
     <div className="Markets-nothing">No goods available!</div>
   );

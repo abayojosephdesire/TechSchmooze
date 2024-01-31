@@ -59,16 +59,24 @@ router.post("/press", auth.ensureLoggedIn, (req, res) => {
 // Markets
 router.get("/markets", (req, res) => {
   Market.find({}).then((markets) => res.send(markets.map((market) => {
+    // console.log(market);
+    // market.file = market.file?.toString('base64');
     return (
-    {
-      ...market,
-      file: market.file?.toString('base64'),
-    }
+      {
+        market,
+        file: market.file?.toString('base64')
+      }
+      // market
+
+    // {
+      // title: market.title,
+      // file: market.file?.toString('base64')
+    // }
     )
   })));
 });
 router.post("/market", auth.ensureLoggedIn, upload.single("file"), (req, res) => {
-  console.log(req.file, "Got an error");
+  // console.log(req.file, "Got an error");
   const newMarket = new Market({
     creator_id: req.user._id,
     creator_name: req.user.name,

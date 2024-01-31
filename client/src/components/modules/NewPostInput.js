@@ -5,6 +5,7 @@ import { post } from "../../utilities";
 import FileBase64 from "react-file-base64";
 
 const NewPostInput = (props) => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [selectedType, setSelectedType] = useState("");
@@ -31,14 +32,8 @@ const NewPostInput = (props) => {
   const handlePriceChange = (event) => {
     setSelectedPrice(event.target.value);
   };
-  // const handleImageChange = (event) => {
-  //   const file = event.target.files[0];
-  //   setSelectedImage(file);
-  // };
-  // const handleUpload = ({ base64 }) => { console.log("handling upload!"); };
-
   const handleUpload = (event) => {
-    console.log(event);
+    // const navigate = useNavigate();
     event.preventDefault();
 
     if (file === undefined) {
@@ -56,14 +51,13 @@ const NewPostInput = (props) => {
     formData.append("category", selectedCategory);
     formData.append("condition", selectedCondition);
     formData.append("price", selectedPrice);
-    console.log("adding market");
     fetch("/api/market", {
       method: "POST",
       body: formData,
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log();
       })
       .catch((error) => {
         console.error("Error uploading profile picture:", error);
@@ -73,20 +67,10 @@ const NewPostInput = (props) => {
     if (!selectedType || !selectedCategory || !selectedCondition || !selectedPrice) {
       alert("Please select all the post filters.");
       return;
+    } else {
+      navigate("/markets/");
     }
 
-    // Current time
-
-    // props.onMarketSubmit && props.onMarketSubmit({
-    //   title,
-    //   content,
-    //   postDate: currentDate,
-    //   type:selectedType,
-    //   category:selectedCategory,
-    //   condition:selectedCondition,
-    //   price:selectedPrice,
-    //   file:file,
-    // });
 
     setTitle("");
     setContent("");
@@ -95,6 +79,7 @@ const NewPostInput = (props) => {
     setSelectedCondition("");
     setSelectedPrice("");
     setFile(undefined);
+
   };
 
   return (
@@ -158,12 +143,6 @@ const NewPostInput = (props) => {
           onChange={handleTitleChange}
           className="NewPostInput-title"
         />
-        {/* <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          className="NewPostInput-imageInput"
-        /> */}
         <FileBase64 type="file" multiple={false} onDone={({ base64 }) =>  { console.log(`base64.length = ${base64 ? base64.length : 0}`); setFile(base64)} } />
         <textarea
           rows="20"

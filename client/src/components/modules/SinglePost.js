@@ -18,8 +18,9 @@ const SinglePost = (props) => {
           <span>Condition: {props.condition}</span>
           <span>Price: ${props.price}</span>
         </p>
-        {props.file ? <img src={`${atob(props.file)}`} className="SinglePost-image" /> : "No image uploaded!"}
+
         <p className="SinglePost-title">{props.title}</p>
+        {props.file ? <img src={`${atob(props.file)}`} className="SinglePost-image" /> : "No image uploaded!"}
         <p className="SinglePost-content">{props.content}</p>
       </div>
     </div>
