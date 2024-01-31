@@ -1,4 +1,4 @@
 .DiscussionChat-container{width:100%;}
-.DiscussionChat-title{padding:20px 40px;margin:0;}
-.DiscussionChat-chats{max-height:60vh;overflow:auto;padding:0 40px;}
-.DiscussionChat-input{position:absolute;bottom:0;padding:0 40px;width:100%;}
+.DiscussionChat-title{padding:70px 40px 20px;margin:0;}
+.DiscussionChat-chats{padding:0 40px;}
+.DiscussionChat-input{padding:10px 40px;width:100%;position:fixed;background-color:#f4f4f4;}

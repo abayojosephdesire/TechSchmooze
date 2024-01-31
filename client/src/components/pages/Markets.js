@@ -102,7 +102,7 @@ const Markets = (props) => {
               <label for="Shares" className="Markets-filtersLabel">Shares</label>
             </li>
             <li>
-              <input type="checkbox" id="GiveAway" value="GiveAway" onChange={() => handleCheckboxChange("type", "GiveAway")} />
+              <input type="checkbox" id="GiveAway" value="Give away" onChange={() => handleCheckboxChange("type", "Give away")} />
               <label for="GiveAway" className="Markets-filtersLabel">Give Away</label>
             </li>
           </ul>
