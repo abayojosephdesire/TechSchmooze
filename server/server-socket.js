@@ -34,20 +34,20 @@ const addUserToRoom = (userId, discussionId) => {
 const removerUserFromRoom = (user) => {
   // console.log(user);
   // console.log("yessssssssss");
-  const discussionId = userToRoomMap[user._id];
-  if (!discussionId){
-    return;
-  }
-  const index = allRooms.indexOf(discussionId);
-  if (index !== -1) {
-    allRooms.splice(index, 1);
-  }
-  delete userToRoomMap[user._id];
   // const discussionId = userToRoomMap[user._id];
-  // if (allRooms.hasOwnProperty(discussionId)) {
-  //   delete allRooms[discussionId];
+  // if (!discussionId){
+  //   return;
+  // }
+  // const index = allRooms.indexOf(discussionId);
+  // if (index !== -1) {
+  //   allRooms.splice(index, 1);
   // }
   // delete userToRoomMap[user._id];
+  const discussionId = userToRoomMap[user._id];
+  if (allRooms.hasOwnProperty(discussionId)) {
+    delete allRooms[discussionId];
+  }
+  delete userToRoomMap[user._id];
 
 
 
