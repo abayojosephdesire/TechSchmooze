@@ -33,8 +33,12 @@ const NewPostInput = (props) => {
     setSelectedPrice(event.target.value);
   };
   const handleUpload = (event) => {
-    // const navigate = useNavigate();
     event.preventDefault();
+
+    if (!selectedType || !selectedCategory || !selectedCondition || !selectedPrice || !file) {
+      alert("Please select all filters.");
+      return;
+    }
 
     if (file === undefined) {
       console.warn("Uploading file with no file set...");
@@ -51,27 +55,13 @@ const NewPostInput = (props) => {
     formData.append("category", selectedCategory);
     formData.append("condition", selectedCondition);
     formData.append("price", selectedPrice);
+
     fetch("/api/market", {
       method: "POST",
       body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log();
-      })
-      .catch((error) => {
-        console.error("Error uploading profile picture:", error);
-      });
-
-
-    if (!selectedType || !selectedCategory || !selectedCondition || !selectedPrice) {
-      alert("Please select all the post filters.");
-      return;
-    } else {
+    }).then(() => {
       navigate("/markets/");
-    }
-
-
+    });
     setTitle("");
     setContent("");
     setSelectedType("");
@@ -166,7 +156,7 @@ const NewPostInput = (props) => {
 
 // New post
 const NewPost = (props) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const addMarket = (body) => {
     post("/api/market", body).then(() => {
       navigate("/markets/");

@@ -44,7 +44,8 @@ const Markets = (props) => {
     }
   };
 
-  const filteredMarkets = markets.filter((marketObj) => {
+  const filteredMarkets = markets.filter((_marketObj) => {
+    const marketObj = _marketObj.market;
     return (
       (selectedFilters.type.length === 0 || selectedFilters.type.includes(marketObj.type)) &&
       (selectedFilters.category.length === 0 || selectedFilters.category.includes(marketObj.category)) &&

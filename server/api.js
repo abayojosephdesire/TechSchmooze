@@ -36,7 +36,7 @@ const socketManager = require("./server-socket");
 //     cb(null, Date.now() + "-" + file.originalname);
 //   },
 // });
-const upload = multer({ limits: {fileSize: 400000} });
+const upload = multer({ limits: {fileSize: 1600000} });
 
 // Presses
 router.get("/presses", (req, res) => {
