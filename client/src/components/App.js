@@ -21,11 +21,13 @@ import "./App.css";
 
 const App = () => {
   const [userId, setUserId] = useState(undefined);
+  const [userName, setUserName] = useState(undefined);
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
         setUserId(user._id);
+        setUserName(user.name);
       }
     });
   }, []);
@@ -36,12 +38,14 @@ const App = () => {
     console.log(`Logged in as ${decodedCredential.name}`);
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
+      setUserName(user.name);
       post("/api/initsocket", { socketid: socket.id });
     });
   };
   const navigate = useNavigate();
   const handleLogout = () => {
     setUserId(undefined);
+    setUserName(undefined);
     post("/api/logout");
     navigate('/');
   };
@@ -55,7 +59,7 @@ const App = () => {
           <Route path="/presses/" element={<Presses userId={userId} />} />
           <Route path="/markets/" element={<Markets userId={userId} />} />
           <Route path="/discussions/" element={<Discussions userId={userId} />} />
-          <Route path="/messages/" element={<Messages userId={userId} />} />
+          <Route path="/messages/" element={<Messages userId={userId} userName={userName} />} />
           <Route path="/post/" element={<Post userId={userId} />} />
           <Route path="/postdiscussion/" element={<PostDiscussion userId={userId} />} />
           <Route path="/postpress/" element={<PostPress userId={userId} />} />

@@ -10,8 +10,15 @@ const Messages = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const recipientId = searchParams.get("recipientId");
-  const recipientName = searchParams.get("recipientName");
+  let recipientId;
+  let recipientName;
+  if (!searchParams.get("recipientId")){
+    recipientId = props.userId;
+    recipientName = props.userName;
+  } else{
+    recipientId = searchParams.get("recipientId");
+    recipientName = searchParams.get("recipientName");
+  }
   const defaultMessageText = searchParams.get("defaultMessageText");
   const [allUsers, setAllUsers] = useState([]);
   const [activeChat, setActiveChat] = useState({
