@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import SingleComment from "./SingleComment.js";
 import { NewComment } from "./NewCommentInput.js";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import "./CommentsBlock.css";
 
 const CommentsBlock = (props) => {
   const [showComments, setShowComments] = useState(false);
+  const [commentCount, setCommentCount] = useState(0);
   const toggleComments = () => {
     setShowComments((prevShowComments) => !prevShowComments);
   };
@@ -13,6 +14,10 @@ const CommentsBlock = (props) => {
     setShowComments(true);
   };
   const navigate = useNavigate();
+  useEffect(() => {
+    setCommentCount(props.comments.length);
+  }, [props.comments]);
+
   const handleMessageClick = () => {
     const recipientUserId = props.market.creator_id;
     const recipientUserName = props.market.creator_name;
@@ -28,7 +33,7 @@ const CommentsBlock = (props) => {
             className="CommentsBlock-commentButton"
             onClick={toggleComments}
           >
-            {showComments ? "Comments" : "Comments"}
+            {`${commentCount} Comments`}
           </button>
         </div>
         <div className="CommentsBlock-titleInput">
