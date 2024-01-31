@@ -9,7 +9,6 @@
 
 const express = require("express");
 const multer = require("multer");
-const app = express();
 
 // import models so we can interact with the database
 const User = require("./models/user");
@@ -29,15 +28,15 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
-  },
-});
-const upload = multer({ storage: storage });
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "./uploads/");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + "-" + file.originalname);
+//   },
+// });
+const upload = multer({ limits: {fileSize: 400000} });
 
 // Presses
 router.get("/presses", (req, res) => {
@@ -56,11 +55,20 @@ router.post("/press", auth.ensureLoggedIn, (req, res) => {
   newPress.save().then((press) => res.send(press));
 });
 
+
 // Markets
 router.get("/markets", (req, res) => {
-  Market.find({}).then((markets) => res.send(markets));
+  Market.find({}).then((markets) => res.send(markets.map((market) => {
+    return (
+    {
+      ...market,
+      file: market.file?.toString('base64'),
+    }
+    )
+  })));
 });
-router.post("/market", auth.ensureLoggedIn, upload.single("image"), (req, res) => {
+router.post("/market", auth.ensureLoggedIn, upload.single("file"), (req, res) => {
+  console.log(req.file, "Got an error");
   const newMarket = new Market({
     creator_id: req.user._id,
     creator_name: req.user.name,
@@ -71,10 +79,13 @@ router.post("/market", auth.ensureLoggedIn, upload.single("image"), (req, res) =
     category: req.body.category,
     condition: req.body.condition,
     price: req.body.price,
-    image: req.file ? `/uploads/${req.file.filename}` : null,
-
+    file: Buffer.from(req.file.buffer),
+    // image: req.file ? `/uploads/${req.file.filename}` : null,
   });
-  newMarket.save().then((market) => res.send(market));
+  newMarket.save().then((market) => { res.status(200).send(market); }).catch((err) => {
+    console.log(`Failed to save image to database: ${err}`);
+    res.status(500).send({ error: "failed to upload!" });
+  });
 });
 
 // Discussions
@@ -161,7 +172,7 @@ router.post("/addUserToRoom", auth.ensureLoggedIn, (req, res) => {
 });
 
 router.post("/removeUserFromRoom", auth.ensureLoggedIn, (req, res) => {
-  socketManager.removerUserFromRoom(req.user._id);
+  socketManager.removerUserFromRoom(req.user);
 });
 
 // Messages

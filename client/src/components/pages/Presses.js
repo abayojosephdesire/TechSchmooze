@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Card from "../modules/Card.js";
+import CardPress from "../modules/CardPress.js";
 import { get } from "../../utilities";
+import "./Presses.css";
 
 const Presses = (props) => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const Presses = (props) => {
   const hasPresses = presses.length !== 0;
   if (hasPresses) {
     pressesList = presses.map((pressObj) => (
-      <Card
+      <CardPress
         _id={pressObj._id}
         creator_name={pressObj.creator_name}
         creator_id={pressObj.creator_id}
@@ -41,14 +42,12 @@ const Presses = (props) => {
     pressesList = <div>Neither events, news, announcements, nor losts & founds available!</div>;
   }
   return (
-    <>
-      <div className="Feed-title">
-        <h2>Press release</h2>
-        <p>Dive into the 'Press' page for a snapshot of campus life—events, news, announcements, and
-          lost-and-found. Stay in the loop and connected to the heartbeat of our community.</p>
+    <div className="Presses-container">
+      <div>
+        <h1>THIS PAGE IS UNDER DEVELOPMENT</h1>
       </div>
       {pressesList}
-    </>
+    </div>
   );
 };
 export default Presses;

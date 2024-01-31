@@ -67,7 +67,7 @@ const Markets = (props) => {
         category={marketObj.category}
         condition={marketObj.condition}
         price={marketObj.price}
-        image={marketObj.image}
+        file={marketObj.file}
       />
     ))
   ) : (

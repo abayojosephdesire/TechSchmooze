@@ -29,7 +29,7 @@ const Card = (props) => {
         category={props.category}
         condition={props.condition}
         price={props.price}
-        image={props.image}
+        file={props.file}
         onClickMessage={props.onClickMessage}
       />
       <CommentsBlock

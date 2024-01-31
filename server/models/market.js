@@ -9,7 +9,7 @@ const MarketSchema = new mongoose.Schema({
   type: String,
   category: String,
   condition: String,
-  image: Buffer,
+  file: Buffer,
   price: String,
 });
 module.exports = mongoose.model("market", MarketSchema);

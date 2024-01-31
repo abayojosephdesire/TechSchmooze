@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./NewPostInput.css";
 import { useNavigate } from "react-router-dom";
 import { post } from "../../utilities";
+import FileBase64 from "react-file-base64";
 
 const NewPostInput = (props) => {
   const [title, setTitle] = useState("");
@@ -10,7 +11,7 @@ const NewPostInput = (props) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedCondition, setSelectedCondition] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [file, setFile] = useState(undefined);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -30,12 +31,44 @@ const NewPostInput = (props) => {
   const handlePriceChange = (event) => {
     setSelectedPrice(event.target.value);
   };
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    setSelectedImage(file);
-  };
-  const handleSubmit = (event) => {
+  // const handleImageChange = (event) => {
+  //   const file = event.target.files[0];
+  //   setSelectedImage(file);
+  // };
+  // const handleUpload = ({ base64 }) => { console.log("handling upload!"); };
+
+  const handleUpload = (event) => {
+    console.log(event);
     event.preventDefault();
+
+    if (file === undefined) {
+      console.warn("Uploading file with no file set...");
+      return;
+    }
+    const currentDate = new Date().toISOString();
+    const formData = new FormData();
+    const imageBlob = new Blob([file], { type: "text/plain" });
+    formData.append("file", imageBlob);
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("postDate", currentDate);
+    formData.append("type", selectedType);
+    formData.append("category", selectedCategory);
+    formData.append("condition", selectedCondition);
+    formData.append("price", selectedPrice);
+    console.log("adding market");
+    fetch("/api/market", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error uploading profile picture:", error);
+      });
+
 
     if (!selectedType || !selectedCategory || !selectedCondition || !selectedPrice) {
       alert("Please select all the post filters.");
@@ -43,17 +76,17 @@ const NewPostInput = (props) => {
     }
 
     // Current time
-    const currentDate = new Date().toISOString();
-    props.onMarketSubmit && props.onMarketSubmit({
-      title,
-      content,
-      postDate: currentDate,
-      type:selectedType,
-      category:selectedCategory,
-      condition:selectedCondition,
-      price:selectedPrice,
-      image:selectedImage,
-    });
+
+    // props.onMarketSubmit && props.onMarketSubmit({
+    //   title,
+    //   content,
+    //   postDate: currentDate,
+    //   type:selectedType,
+    //   category:selectedCategory,
+    //   condition:selectedCondition,
+    //   price:selectedPrice,
+    //   file:file,
+    // });
 
     setTitle("");
     setContent("");
@@ -61,7 +94,7 @@ const NewPostInput = (props) => {
     setSelectedCategory("");
     setSelectedCondition("");
     setSelectedPrice("");
-    setSelectedImage("");
+    setFile(undefined);
   };
 
   return (
@@ -125,12 +158,13 @@ const NewPostInput = (props) => {
           onChange={handleTitleChange}
           className="NewPostInput-title"
         />
-        <input
+        {/* <input
           type="file"
           accept="image/*"
           onChange={handleImageChange}
           className="NewPostInput-imageInput"
-        />
+        /> */}
+        <FileBase64 type="file" multiple={false} onDone={({ base64 }) =>  { console.log(`base64.length = ${base64 ? base64.length : 0}`); setFile(base64)} } />
         <textarea
           rows="20"
           placeholder={props.defaultBody}
@@ -141,7 +175,7 @@ const NewPostInput = (props) => {
         <button
           type="submit"
           value="Submit"
-          onClick={handleSubmit}
+          onClick={handleUpload}
           className="NewPostInput-submit"
         >
           Post
