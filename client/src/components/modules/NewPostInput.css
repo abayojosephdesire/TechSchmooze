@@ -9,6 +9,8 @@
 
 .NewPostInput-title, .NewPostInput-body{width:100%;padding:15px;border:1px solid #f0f0f0;}
 .NewPostInput-title{font-size:16px;font-weight:bold;}
+.NewPostInput-file{padding:15px 0;}
+.NewPostInput-file > span{display:inline-block;color:rgb(164, 0, 0);font-size:15px;}
 .NewPostInput-body{resize:none;}
 .NewPostInput-submit{float:right;background-color:var(--primary);padding:8px 20px;border:none;color:#fff;
 font-size:15px;font-weight:bold;width:30%;margin-top:5px;}

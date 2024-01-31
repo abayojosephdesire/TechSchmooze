@@ -133,7 +133,10 @@ const NewPostInput = (props) => {
           onChange={handleTitleChange}
           className="NewPostInput-title"
         />
-        <FileBase64 type="file" multiple={false} onDone={({ base64 }) =>  { console.log(`base64.length = ${base64 ? base64.length : 0}`); setFile(base64)} } />
+        <div className="NewPostInput-file">
+          <FileBase64 type="file" multiple={false} onDone={({ base64 }) =>  { console.log(`base64.length = ${base64 ? base64.length : 0}`); setFile(base64)} } />
+          <span>* Please, upload an image less than 1MB!</span>
+        </div>
         <textarea
           rows="20"
           placeholder={props.defaultBody}
