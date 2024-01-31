@@ -4,7 +4,6 @@ const PressSchema = new mongoose.Schema({
   creator_id: String,
   creator_name: String,
   postDate: String,
-  type: String,
   title: String,
   content: String,
 });

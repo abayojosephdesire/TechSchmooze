@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 import "./NavBar.css";
@@ -7,11 +7,18 @@ import "./NavBar.css";
 const GOOGLE_CLIENT_ID = "375397322348-64k2rahhcrctb6gkojf4bdtuunrcp7th.apps.googleusercontent.com";
 
 const NavBar = ({ userId, handleLogin, handleLogout }) => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   const [isNavVisible, setIsNavVisible] = useState(false);
   const toggleNav = () => {
     setIsNavVisible(!isNavVisible);
   };
   const location = useLocation();
+  useEffect(() => {
+    setIsNavVisible(false);
+  }, [location]);
   const isActiveLink = (path) => {
     return location.pathname === path;
   };
@@ -41,6 +48,7 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
               <div className="NavBar-dropContainer">
                 <div><Link to="/post/" className="NavBar-dropitem">Post on Market</Link></div>
                 <div><Link to="/postdiscussion/" className="NavBar-dropitem">Start a discussion</Link></div>
+                <div><Link to="/postpress/" className="NavBar-dropitem">Share on press</Link></div>
               </div>
             </div>
             <div className="NavBar-loginContainer">
@@ -87,6 +95,7 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
             <h3>Post</h3>
             <div><Link to="/post/" className="PhoneNav-link">Post on Market</Link></div>
             <div><Link to="/postdiscussion/" className="PhoneNav-link">Start a discussion</Link></div>
+            <div><Link to="/postpress/" className="PhoneNav-link">Share on press</Link></div>
           </div>
           <div className="PhoneNav-item">
             <h3>Your account</h3>

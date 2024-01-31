@@ -13,6 +13,7 @@ import DiscussionMessages from "./pages/DiscussionMessages.js";
 import Messages from "./pages/Messages.js";
 import Post from "./pages/Post.js";
 import PostDiscussion from "./pages/PostDiscussion.js";
+import PostPress from "./pages/PostPress.js";
 import Footer from "./modules/Footer.js";
 import NotFound from "./pages/NotFound.js";
 import "../utilities.css";
@@ -57,6 +58,7 @@ const App = () => {
           <Route path="/messages/" element={<Messages userId={userId} />} />
           <Route path="/post/" element={<Post userId={userId} />} />
           <Route path="/postdiscussion/" element={<PostDiscussion userId={userId} />} />
+          <Route path="/postpress/" element={<PostPress userId={userId} />} />
           <Route path="/discussionMessages/" element={<DiscussionMessages userId={userId} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

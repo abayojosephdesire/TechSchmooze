@@ -47,7 +47,6 @@ router.post("/press", auth.ensureLoggedIn, (req, res) => {
     creator_id: req.user._id,
     creator_name: req.user.name,
     postDate: req.body.postDate,
-    type: req.body.type,
     title: req.body.title,
     content: req.body.content,
   });

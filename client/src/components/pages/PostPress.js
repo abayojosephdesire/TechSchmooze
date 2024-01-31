@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import { NewPostDiscussion} from "../modules/NewPostDiscussionInput.js";
+import { NewPostPress} from "../modules/NewPostPressInput.js";
 import { useNavigate } from "react-router-dom";
 
 const PostPress = (props) => {
@@ -15,7 +15,7 @@ const PostPress = (props) => {
   }, []);
   return (
     <>
-        {props.userId && <NewPostDiscussion />}
+        {props.userId && <NewPostPress />}
     </>
   );
 }

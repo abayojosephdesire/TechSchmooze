@@ -32,7 +32,6 @@ const Presses = (props) => {
         creator_name={pressObj.creator_name}
         creator_id={pressObj.creator_id}
         userId={props.userId}
-        type={pressObj.type}
         postDate={pressObj.postDate}
         title={pressObj.title}
         content={pressObj.content}
@@ -44,7 +43,7 @@ const Presses = (props) => {
   return (
     <div className="Presses-container">
       <div>
-        <h1>THIS PAGE IS UNDER DEVELOPMENT</h1>
+        <h2>News | Announcements | Lost & founds</h2>
       </div>
       {pressesList}
     </div>

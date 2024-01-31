@@ -19,7 +19,7 @@ font-weight:bold;font-size:15px;display:block;}
 .NavBar-linkDrop:hover{text-decoration:none;}
 .NavBar-login{background-color:#b10303;border:none;padding:8px 17px;color:#fff;font-weight:bold;font-size:13px;}
 .NavBar-dropdown:hover .NavBar-dropContainer{display:block;}
-.NavBar-dropContainer{display:none;position:absolute;z-index:1;background-color:#fff;padding:0 10px;}
+.NavBar-dropContainer{display:none;position:absolute;z-index:1;background-color:#fff;padding:0 10px;box-shadow:0 2px 2px 2px #e5e5e5;}
 .NavBar-dropitem{display:block;margin:15px 0;font-size:15px;font-weight:bold;}
 .NavBar-buttonLink{display:flex;margin-left:auto;padding-top:15px;}
 .NavBar-buttonLink > div{padding:0 10px;}
@@ -45,6 +45,6 @@ color:#fff;border:none;border-radius:5px;cursor:default;}
 
 @media screen and (max-width:768px){
     .NavBar-showNav, .NavBar-hideNav{display:block;}
-    .NavBar-title{font-size:17px;margin:20px 10px}
+    .NavBar-title{margin:20px 10px}
     .NavBar-buttonLink, .NavBar-linkContainer{display:none;}
 }

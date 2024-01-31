@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SinglePressPost from "./SinglePressPost.js";
 import { get } from "../../utilities";
-import "./Card.css";
 
 // Change
 const CardPress = (props) => {
