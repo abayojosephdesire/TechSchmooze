@@ -1,6 +1,6 @@
-.Markets-container{display:flex;max-width:1100px;}
+.Markets-container{display:flex;max-width:1100px;margin:auto;}
 .Markets-container > div{padding:0 40px;}
-.Markets-filters{width:30%;}
+.Markets-filters{width:25%;}
 .Markets-list{width:60%;}
 .Markets-filtersTitle{color:#717171;display:inline-block;}
 .Markets-filtersItem{padding:10px 0;}
